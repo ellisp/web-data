@@ -5,8 +5,8 @@ library(stringr)
 download.file("http://www.carbonnews.co.nz/", destfile = "tmp/carbonnews.html")
 
 cn <- readLines("tmp/carbonnews.html")
-pr <- str_match(cn, "Spot NZUs close at \\$[0-9]+\\.[0-9][0-9]")
-pr <- as.numeric(str_sub(pr[!is.na(pr)], 21))
+pr <- str_match(cn, "\\$[0-9]+\\.[0-9][0-9]")
+pr <- mean(as.numeric(str_sub(pr[!is.na(pr)], 2)))
 
 if(length(pr) != 1 | is.na(pr)){
   stop("Something wrong with the nz-carbon.R")
